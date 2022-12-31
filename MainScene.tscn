@@ -1,16 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://blmhs2knql5pa"]
 
-[ext_resource type="Script" path="res://Player/Player.cs" id="1_r4pv5"]
-[ext_resource type="Texture2D" uid="uid://cufnbpfk4128k" path="res://Player/playerSheet.png" id="2_ghp5l"]
+[ext_resource type="PackedScene" uid="uid://b0sfpbfkm7ajv" path="res://Player/Player.tscn" id="2_31j1w"]
+[ext_resource type="PackedScene" uid="uid://chmraqmv1noiw" path="res://World/House.tscn" id="2_ljhvv"]
 
 [node name="Main" type="Node2D"]
+y_sort_enabled = true
 
-[node name="Player" type="CharacterBody2D" parent="."]
-script = ExtResource("1_r4pv5")
+[node name="Player" parent="." instance=ExtResource("2_31j1w")]
+position = Vector2(24, 32)
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-texture_filter = 1
-texture_repeat = 1
-position = Vector2(113, 62)
-texture = ExtResource("2_ghp5l")
-hframes = 36
+[node name="House" parent="." instance=ExtResource("2_ljhvv")]
+position = Vector2(240, 88)
+
+[node name="House2" parent="." instance=ExtResource("2_ljhvv")]
+position = Vector2(80, 88)
