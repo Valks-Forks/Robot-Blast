@@ -10,8 +10,8 @@ public partial class Player : Godot.CharacterBody2D {
 
     public override void _PhysicsProcess(double delta) {
         Vector2 InputVector = Vector2.Zero;
-        InputVector.x = Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left");
-        InputVector.y = Input.GetActionStrength("ui_down") - Input.GetActionStrength("ui_up");
+        InputVector.x = Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left");
+        InputVector.y = Input.GetActionStrength("move_down") - Input.GetActionStrength("move_up");
         InputVector = InputVector.Normalized();
 
         GD.Print(InputVector);
