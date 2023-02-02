@@ -24,7 +24,7 @@ public partial class Player : CharacterBody2D
 
     public override void _PhysicsProcess(double delta) 
     {
-        Vector2 InputVector = Vector2.Zero;
+        var InputVector = Vector2.Zero;
         InputVector.X = Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left");
         InputVector.Y = Input.GetActionStrength("move_down") - Input.GetActionStrength("move_up");
         InputVector = InputVector.Normalized();
