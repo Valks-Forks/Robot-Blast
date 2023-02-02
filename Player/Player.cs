@@ -4,13 +4,13 @@ global using System;
 namespace RobotBlast;
 
 public partial class Player : Godot.CharacterBody2D {
-    int Acceleration = 500;
-    int MaxSpeed = 80;
-    int Friction = 500;
+    [Export] private int Acceleration { get; set; } = 500;
+    [Export] private int MaxSpeed { get; set; } = 80;
+    [Export] private int Friction { get; set; } = 500;
 
-    AnimationPlayer RobotAnimation;
-    AnimationTree RobotAnimationTree;
-    AnimationNodeStateMachinePlayback StateMachine;
+    private AnimationPlayer RobotAnimation { get; set; }
+    private AnimationTree RobotAnimationTree { get; set; }
+	private AnimationNodeStateMachinePlayback StateMachine { get; set; }
 
     public override void _Ready() {
         RobotAnimation = (AnimationPlayer)GetNode("RobotAnimation");
