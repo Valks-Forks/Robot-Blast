@@ -3,7 +3,8 @@ global using System;
 
 namespace RobotBlast;
 
-public partial class Player : CharacterBody2D {
+public partial class Player : CharacterBody2D 
+{
     [Export] private int Acceleration { get; set; } = 500;
     [Export] private int MaxSpeed { get; set; } = 80;
     [Export] private int Friction { get; set; } = 500;
@@ -12,13 +13,15 @@ public partial class Player : CharacterBody2D {
     private AnimationTree RobotAnimationTree { get; set; }
 	private AnimationNodeStateMachinePlayback StateMachine { get; set; }
 
-    public override void _Ready() {
+    public override void _Ready() 
+    {
         RobotAnimation = (AnimationPlayer)GetNode("RobotAnimation");
         RobotAnimationTree = (AnimationTree)GetNode("RobotAnimationTree");
         StateMachine = (AnimationNodeStateMachinePlayback)RobotAnimationTree.Get("parameters/playback");
     }
 
-    public override void _PhysicsProcess(double delta) {
+    public override void _PhysicsProcess(double delta) 
+    {
         Vector2 InputVector = Vector2.Zero;
         InputVector.X = Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left");
         InputVector.Y = Input.GetActionStrength("move_down") - Input.GetActionStrength("move_up");
