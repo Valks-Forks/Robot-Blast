@@ -24,10 +24,11 @@ public partial class Player : CharacterBody2D
 
     public override void _PhysicsProcess(double delta) 
     {
-        var inputVector = Vector2.Zero;
-        inputVector.X = Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left");
-        inputVector.Y = Input.GetActionStrength("move_down") - Input.GetActionStrength("move_up");
-        inputVector = inputVector.Normalized();
+        var inputVector = new Vector2
+        {
+			X = Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left"),
+			Y = Input.GetActionStrength("move_down" ) - Input.GetActionStrength("move_up"  )
+		}.Normalized();
 
         if (inputVector != Vector2.Zero) {
             RobotAnimationTree.Set("parameters/Idle/blend_position", inputVector);
