@@ -3,7 +3,7 @@ global using System;
 
 namespace RobotBlast;
 
-public partial class Player : Godot.CharacterBody2D {
+public partial class Player : CharacterBody2D {
     [Export] private int Acceleration { get; set; } = 500;
     [Export] private int MaxSpeed { get; set; } = 80;
     [Export] private int Friction { get; set; } = 500;
