@@ -24,17 +24,17 @@ public partial class Player : CharacterBody2D
 
     public override void _PhysicsProcess(double delta) 
     {
-        var InputVector = Vector2.Zero;
-        InputVector.X = Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left");
-        InputVector.Y = Input.GetActionStrength("move_down") - Input.GetActionStrength("move_up");
-        InputVector = InputVector.Normalized();
+        var inputVector = Vector2.Zero;
+        inputVector.X = Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left");
+        inputVector.Y = Input.GetActionStrength("move_down") - Input.GetActionStrength("move_up");
+        inputVector = inputVector.Normalized();
 
-        if (InputVector != Vector2.Zero) {
-            RobotAnimationTree.Set("parameters/Idle/blend_position", InputVector);
-            RobotAnimationTree.Set("parameters/Run/blend_position", InputVector);
+        if (inputVector != Vector2.Zero) {
+            RobotAnimationTree.Set("parameters/Idle/blend_position", inputVector);
+            RobotAnimationTree.Set("parameters/Run/blend_position", inputVector);
             StateMachine.Travel("Run");
 
-            Velocity = Velocity.MoveToward(InputVector * MaxSpeed, Acceleration * (float)delta);
+            Velocity = Velocity.MoveToward(inputVector * MaxSpeed, Acceleration * (float)delta);
         } 
         
         else {
