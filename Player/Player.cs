@@ -1,6 +1,8 @@
 global using Godot;
 global using System;
 
+using AnimationNSMP = Godot.AnimationNodeStateMachinePlayback;
+
 namespace RobotBlast;
 
 public partial class Player : CharacterBody2D 
@@ -11,13 +13,13 @@ public partial class Player : CharacterBody2D
 
     private AnimationPlayer RobotAnimation { get; set; }
     private AnimationTree RobotAnimationTree { get; set; }
-	private AnimationNodeStateMachinePlayback StateMachine { get; set; }
+	private AnimationNSMP StateMachine { get; set; }
 
     public override void _Ready() 
     {
         RobotAnimation = GetNode<AnimationPlayer>("RobotAnimation");
         RobotAnimationTree = GetNode<AnimationTree>("RobotAnimationTree");
-        StateMachine = (AnimationNodeStateMachinePlayback)RobotAnimationTree.Get("parameters/playback");
+        StateMachine = (AnimationNSMP)RobotAnimationTree.Get("parameters/playback");
     }
 
     public override void _PhysicsProcess(double delta) 
