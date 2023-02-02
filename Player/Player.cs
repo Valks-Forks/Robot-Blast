@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.Transactions;
 
+namespace RobotBlast;
+
 public partial class Player : Godot.CharacterBody2D {
     int Acceleration = 500;
     int MaxSpeed = 80;
