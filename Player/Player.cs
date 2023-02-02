@@ -30,15 +30,16 @@ public partial class Player : CharacterBody2D
 			Y = Input.GetActionStrength("move_down" ) - Input.GetActionStrength("move_up"  )
 		}.Normalized();
 
-        if (inputVector != Vector2.Zero) {
+        if (inputVector != Vector2.Zero) 
+        {
             RobotAnimationTree.Set("parameters/Idle/blend_position", inputVector);
             RobotAnimationTree.Set("parameters/Run/blend_position", inputVector);
             StateMachine.Travel("Run");
 
             Velocity = Velocity.MoveToward(inputVector * MaxSpeed, Acceleration * (float)delta);
         } 
-        
-        else {
+        else 
+        {
             StateMachine.Travel("Idle");
             Velocity = Velocity.MoveToward(Vector2.Zero, Friction * (float)delta);
         }
