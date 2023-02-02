@@ -22,8 +22,10 @@ public partial class Player : CharacterBody2D
         StateMachine = (AnimationNSMP)RobotAnimationTree.Get("parameters/playback");
     }
 
-    public override void _PhysicsProcess(double delta) 
+    public override void _PhysicsProcess(double d) 
     {
+        var delta = (float)d;
+
         var inputVector = new Vector2
         {
 			X = Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left"),
@@ -36,12 +38,12 @@ public partial class Player : CharacterBody2D
             RobotAnimationTree.Set("parameters/Run/blend_position", inputVector);
             StateMachine.Travel("Run");
 
-            Velocity = Velocity.MoveToward(inputVector * MaxSpeed, Acceleration * (float)delta);
+            Velocity = Velocity.MoveToward(inputVector * MaxSpeed, Acceleration * delta);
         } 
         else 
         {
             StateMachine.Travel("Idle");
-            Velocity = Velocity.MoveToward(Vector2.Zero, Friction * (float)delta);
+            Velocity = Velocity.MoveToward(Vector2.Zero, Friction * delta);
         }
 
         MoveAndSlide();
