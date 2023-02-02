@@ -7,13 +7,13 @@ namespace RobotBlast;
 
 public partial class Player : CharacterBody2D 
 {
-    [Export] private int Acceleration { get; set; } = 500;
-    [Export] private int MaxSpeed { get; set; } = 80;
-    [Export] private int Friction { get; set; } = 500;
+    [Export] private int Acceleration          { get; set; } = 500;
+    [Export] private int MaxSpeed              { get; set; } = 80;
+    [Export] private int Friction              { get; set; } = 500;
 
-    private AnimationPlayer RobotAnimation { get; set; }
-    private AnimationTree RobotAnimationTree { get; set; }
-	private AnimationNSMP StateMachine { get; set; }
+    private AnimationPlayer RobotAnimation     { get; set; }
+    private AnimationTree   RobotAnimationTree { get; set; }
+	private AnimationNSMP   StateMachine       { get; set; }
 
     public override void _Ready() 
     {
