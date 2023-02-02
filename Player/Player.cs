@@ -14,6 +14,7 @@ public partial class Player : CharacterBody2D
     private AnimationPlayer RobotAnimation     { get; set; }
     private AnimationTree   RobotAnimationTree { get; set; }
 	private AnimationNSMP   StateMachine       { get; set; }
+    private Vector2         InputVec           { get; set; }
 
     public override void _Ready() 
     {
@@ -26,25 +27,21 @@ public partial class Player : CharacterBody2D
     {
         var delta = (float)d;
 
-        var inputVec = new Vector2
-        {
-			X = Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left"),
-			Y = Input.GetActionStrength("move_down" ) - Input.GetActionStrength("move_up"  )
-		}.Normalized();
+		InputVec = GetInput();
 
         Vector2 moveVec;
 		float friction; // not sure if this should be called friction or acceleration or something else
 
-        if (inputVec != Vector2.Zero) 
+        if (MovingAround()) 
         {
-            RobotAnimationTree.Set("parameters/Idle/blend_position", inputVec);
-            RobotAnimationTree.Set("parameters/Run/blend_position", inputVec);
+            RobotAnimationTree.Set("parameters/Idle/blend_position", InputVec);
+            RobotAnimationTree.Set("parameters/Run/blend_position", InputVec);
             StateMachine.Travel("Run");
 
-			moveVec = inputVec * MaxSpeed;
+			moveVec = InputVec * MaxSpeed;
 			friction = Acceleration * delta;
         } 
-        else 
+        else
         {
             StateMachine.Travel("Idle");
 
@@ -56,4 +53,12 @@ public partial class Player : CharacterBody2D
 
 		MoveAndSlide();
     }
+
+    private Vector2 GetInput() => new Vector2
+	{
+		X = Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left"),
+		Y = Input.GetActionStrength("move_down") - Input.GetActionStrength("move_up")
+	}.Normalized();
+
+	private bool MovingAround() => InputVec != Vector2.Zero;
 }
