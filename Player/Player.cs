@@ -17,9 +17,9 @@ public partial class Player : CharacterBody2D
 
     public override void _Ready() 
     {
-        RobotAnimation = GetNode<AnimationPlayer>("RobotAnimation");
-        RobotAnimationTree = GetNode<AnimationTree>("RobotAnimationTree");
-        StateMachine = (AnimationNSMP)RobotAnimationTree.Get("parameters/playback");
+        RobotAnimation     = GetNode<AnimationPlayer>             ("RobotAnimation");
+        RobotAnimationTree = GetNode<AnimationTree>               ("RobotAnimationTree");
+        StateMachine       = (AnimationNSMP)RobotAnimationTree.Get("parameters/playback");
     }
 
     public override void _PhysicsProcess(double d) 
