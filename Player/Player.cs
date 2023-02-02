@@ -1,6 +1,5 @@
-using Godot;
-using System;
-using System.Transactions;
+global using Godot;
+global using System;
 
 namespace RobotBlast;
 
