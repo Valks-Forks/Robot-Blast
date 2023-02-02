@@ -26,26 +26,34 @@ public partial class Player : CharacterBody2D
     {
         var delta = (float)d;
 
-        var inputVector = new Vector2
+        var inputVec = new Vector2
         {
 			X = Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left"),
 			Y = Input.GetActionStrength("move_down" ) - Input.GetActionStrength("move_up"  )
 		}.Normalized();
 
-        if (inputVector != Vector2.Zero) 
+        Vector2 moveVec;
+		float friction; // not sure if this should be called friction or acceleration or something else
+
+        if (inputVec != Vector2.Zero) 
         {
-            RobotAnimationTree.Set("parameters/Idle/blend_position", inputVector);
-            RobotAnimationTree.Set("parameters/Run/blend_position", inputVector);
+            RobotAnimationTree.Set("parameters/Idle/blend_position", inputVec);
+            RobotAnimationTree.Set("parameters/Run/blend_position", inputVec);
             StateMachine.Travel("Run");
 
-            Velocity = Velocity.MoveToward(inputVector * MaxSpeed, Acceleration * delta);
+			moveVec = inputVec * MaxSpeed;
+			friction = Acceleration * delta;
         } 
         else 
         {
             StateMachine.Travel("Idle");
-            Velocity = Velocity.MoveToward(Vector2.Zero, Friction * delta);
+
+            moveVec = Vector2.Zero;
+            friction = Friction * delta;
         }
 
-        MoveAndSlide();
+		Velocity = Velocity.MoveToward(moveVec, friction);
+
+		MoveAndSlide();
     }
 }
